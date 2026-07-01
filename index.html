@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fbfbfd">
+    <title>Music Mania</title>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/components.css">
+    <link rel="stylesheet" href="./styles/responsive.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary">
+        <div class="brand" aria-label="Music Mania">
+          <span class="brand-mark" aria-hidden="true">♪</span>
+          <span>Music Mania</span>
+        </div>
+        <nav class="nav-list" id="primary-nav"></nav>
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Playlists</div>
+          <nav class="playlist-nav" id="playlist-nav"></nav>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <div class="window-controls" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="nav-actions">
+            <button class="icon-button" id="back-button" type="button" aria-label="Back" data-tooltip="Back">‹</button>
+            <button class="icon-button" id="forward-button" type="button" aria-label="Forward" data-tooltip="Forward">›</button>
+          </div>
+          <label class="search-box" for="global-search">
+            <span aria-hidden="true">⌕</span>
+            <input id="global-search" type="search" placeholder="Search music, artists, albums" autocomplete="off">
+          </label>
+          <button class="profile-button" id="settings-button" type="button" aria-label="Open settings">
+            <span class="avatar" aria-hidden="true">PM</span>
+            <span class="profile-copy">Settings</span>
+          </button>
+        </header>
+
+        <main class="content" id="main-content" tabindex="-1"></main>
+      </div>
+
+      <aside class="side-panel" id="queue-panel" aria-label="Queue"></aside>
+      <aside class="side-panel lyrics-panel" id="lyrics-panel" aria-label="Lyrics"></aside>
+    </div>
+
+    <section class="player" id="player" aria-label="Music player"></section>
+    <div class="mobile-nav" id="mobile-nav" aria-label="Mobile primary navigation"></div>
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+    <script type="module" src="./scripts/app.js"></script>
+  </body>
+</html>

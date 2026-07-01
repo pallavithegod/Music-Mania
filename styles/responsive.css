@@ -1,0 +1,213 @@
+@media (max-width: 1180px) {
+  :root {
+    --sidebar: 224px;
+  }
+
+  .topbar {
+    grid-template-columns: auto minmax(160px, 1fr) auto;
+  }
+
+  .window-controls {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-card {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  :root {
+    --player: 118px;
+  }
+
+  body {
+    overflow: hidden;
+  }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+    height: calc(100dvh - var(--player) - 64px);
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .topbar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .nav-actions {
+    display: none;
+  }
+
+  .profile-copy {
+    display: none;
+  }
+
+  .content {
+    padding: 20px 16px 28px;
+  }
+
+  .view-header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .hero {
+    min-height: 330px;
+    padding: 24px;
+  }
+
+  .hero-detail {
+    grid-template-columns: 120px minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
+    padding: 14px;
+  }
+
+  .album-grid,
+  .artist-grid {
+    grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+    gap: 12px;
+  }
+
+  .playlist-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .track-row {
+    grid-template-columns: 28px minmax(0, 1fr) 42px 34px;
+  }
+
+  .track-meta {
+    display: none;
+  }
+
+  .player {
+    bottom: 64px;
+  }
+
+  .player-inner {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 8px 12px;
+    padding: 10px 14px;
+  }
+
+  .now-playing {
+    grid-template-columns: 46px minmax(0, 1fr);
+  }
+
+  .player-center {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .player-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .volume {
+    display: none;
+  }
+
+  .progress-row {
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    width: 100%;
+  }
+
+  .mobile-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 70;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    height: 64px;
+    border-top: 1px solid var(--line);
+    background: var(--surface-strong);
+    backdrop-filter: blur(28px) saturate(1.4);
+    -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  }
+
+  .mobile-nav-item {
+    justify-content: center;
+    flex-direction: column;
+    gap: 3px;
+    min-height: 64px;
+    border-radius: 0;
+    font-size: 0.68rem;
+  }
+
+  .mobile-nav-item .nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .side-panel {
+    height: calc(100dvh - var(--player) - 64px);
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --topbar: 64px;
+  }
+
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .search-box {
+    min-width: 0;
+  }
+
+  .profile-button {
+    padding-right: 5px;
+  }
+
+  .view-title {
+    font-size: 2.25rem;
+  }
+
+  .hero {
+    min-height: 300px;
+  }
+
+  .hero-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-detail .art {
+    width: min(190px, 70vw);
+  }
+
+  .section-head {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .album-grid,
+  .artist-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .player-actions .icon-button:not([data-panel]) {
+    display: none;
+  }
+
+  .toast-region {
+    left: 12px;
+    right: 12px;
+  }
+}
