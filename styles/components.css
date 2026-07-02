@@ -781,6 +781,29 @@
   text-align: center;
 }
 
+.error-page {
+  display: grid;
+  min-height: 100dvh;
+  padding: 24px;
+  place-items: center;
+}
+
+.error-panel {
+  display: grid;
+  justify-items: center;
+  width: min(100%, 680px);
+  padding: clamp(28px, 6vw, 56px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.error-panel .play-button {
+  margin-top: 24px;
+}
+
 .toast-region {
   position: fixed;
   right: 18px;

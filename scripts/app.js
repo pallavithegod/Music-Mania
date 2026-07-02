@@ -28,14 +28,35 @@ const routeViews = {
   settings: () => settingsView()
 };
 
+function hasUnknownPath() {
+  const path = location.pathname.replace(/\/+$/, "");
+  return path !== "" && path !== "/" && !path.endsWith("/index.html") && !path.endsWith("/error.html");
+}
+
+function redirectToErrorPage() {
+  location.replace(new URL("../error.html", import.meta.url));
+}
+
 function parseHash() {
-  const [name = "home", id = null] = location.hash.replace("#/", "").split("/");
-  const validRoute = routeViews[name] ? name : "home";
+  if (hasUnknownPath()) {
+    redirectToErrorPage();
+    return false;
+  }
+
+  const [nameSegment = "home", id = null] = location.hash.replace("#/", "").split("/");
+  const name = nameSegment || "home";
+  const validRoute = routeViews[name] ? name : null;
+  if (!validRoute) {
+    redirectToErrorPage();
+    return false;
+  }
   setRoute(validRoute, id);
+  return true;
 }
 
 function navigate(name, id = null) {
   const nextHash = id ? `#/${name}/${id}` : `#/${name}`;
+
   if (location.hash === nextHash) {
     parseHash();
     renderApp();
@@ -181,7 +202,12 @@ function bindEvents() {
   elements.forwardButton.addEventListener("click", () => history.forward());
 
   window.addEventListener("hashchange", () => {
-    parseHash();
+    if (!parseHash()) return;
+    renderApp();
+  });
+
+  window.addEventListener("popstate", () => {
+    if (!parseHash()) return;
     renderApp();
   });
 
@@ -202,7 +228,7 @@ function bindEvents() {
 
 function boot() {
   setTheme(state.settings.theme);
-  parseHash();
+  if (!parseHash()) return;
   if (!location.hash) navigate("home");
   bindEvents();
   setPlayerTick(renderChrome);
