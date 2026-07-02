@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_REGION = 'ap-south-1'
+        AWS_REGION = 'eu-north-1a'
         AWS_ACCOUNT_ID = 'YOUR_AWS_ACCOUNT_ID'
         ECR_REPO = 'music-mania'
         PROD_HOST = 'YOUR_INSTANCE_2_PRIVATE_IP'
