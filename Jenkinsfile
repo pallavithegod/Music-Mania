@@ -3,23 +3,28 @@ pipeline {
 
     environment {
         AWS_REGION = 'eu-north-1'
-        AWS_ACCOUNT_ID = '001740294602'
         ECR_REPO = 'music-mania'
-        PROD_HOST = 'YOUR_INSTANCE_2_PRIVATE_IP'
         IMAGE_TAG = "${env.GIT_COMMIT.take(7)}"
-        ECR_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}"
     }
 
     stages {
-        stage('Checkout') {
+        stage('Validate Config') {
             steps {
-                checkout scm
+                sh '''
+                    test -n "$AWS_ACCOUNT_ID" || (echo "AWS_ACCOUNT_ID missing in Jenkins env" && exit 1)
+                    test -n "$PROD_HOST" || (echo "PROD_HOST missing in Jenkins env" && exit 1)
+
+                    echo "$AWS_ACCOUNT_ID" | grep -Eq '^[0-9]{12}$' || (echo "AWS_ACCOUNT_ID must be 12 digits" && exit 1)
+                    echo "$AWS_REGION" | grep -Eq '^[a-z]{2}-[a-z]+-[0-9]$' || (echo "AWS_REGION must be like eu-north-1, not eu-north-1a" && exit 1)
+                '''
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 sh '''
+                    ECR_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO"
+
                     docker build -t $ECR_REPO:$IMAGE_TAG .
                     docker tag $ECR_REPO:$IMAGE_TAG $ECR_URI:$IMAGE_TAG
                     docker tag $ECR_REPO:$IMAGE_TAG $ECR_URI:latest
@@ -38,6 +43,8 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 sh '''
+                    ECR_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO"
+
                     docker push $ECR_URI:$IMAGE_TAG
                     docker push $ECR_URI:latest
                 '''
