@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        AWS_REGION = 'eu-north-1a'
-        AWS_ACCOUNT_ID = 'YOUR_AWS_ACCOUNT_ID'
+        AWS_REGION = 'eu-north-1'
+        AWS_ACCOUNT_ID = '001740294602'
         ECR_REPO = 'music-mania'
         PROD_HOST = 'YOUR_INSTANCE_2_PRIVATE_IP'
         IMAGE_TAG = "${env.GIT_COMMIT.take(7)}"
